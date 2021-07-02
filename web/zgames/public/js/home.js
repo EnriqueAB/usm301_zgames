@@ -11,9 +11,11 @@ const cargarMarcas = async()=>{
         marcaSelect.appendChild(option);
     });
 };
-
-cargarMarcas();
-
+//Esto ejecuta un codigo asegurandose que el total de la pagina
+//Incluidos todos sus recursos esten cargado antes de ejecutar
+document.addEventListener("DOMContentLoaded",()=>{
+    cargarMarcas();
+});
 document.querySelector("#registrar-btn").addEventListener("click", async()=>{
     let nombre = document.querySelector("#nombre-txt").value;
     let marca = document.querySelector("#marca-select").value;
@@ -30,5 +32,11 @@ document.querySelector("#registrar-btn").addEventListener("click", async()=>{
     //4. Todos felices
     let res = await crearConsola(consola);
     //Mostrar un mensaje de exito con sweet 
-    Swal.fire("Consola Creada","Consola creada exitosamente","info");
+    await Swal.fire("Consola Creada","Consola creada exitosamente","info");
+    //La línea que viene despues del Swal.fire se va a ejecutar solo cuando la persona aprete el ok
+    //Aquí redirigir a otra página
+
+    window.location.href = "ver_consolas";
+    //abrir nueva pestaña
+    //window.open("www.google.cl","_blank");
 });
